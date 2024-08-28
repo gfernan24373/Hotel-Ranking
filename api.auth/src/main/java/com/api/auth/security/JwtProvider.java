@@ -95,6 +95,9 @@ public class JwtProvider {
             return false;
         }
 
-        return isAdmin(token) || !routeValidation.isAdmin(requestDTO);
+        if(!isAdmin(token) && routeValidation.isAdmin(requestDTO) ){
+            return false;
+        }
+        return true;
     }
 }

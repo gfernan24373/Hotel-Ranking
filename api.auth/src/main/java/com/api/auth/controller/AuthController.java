@@ -29,7 +29,7 @@ public class AuthController {
     }
 
     @PostMapping("/validate")
-    public ResponseEntity<TokenDTO> validate(@RequestBody String token, @RequestBody RequestDTO requestDTO) {
+    public ResponseEntity<TokenDTO> validate(@RequestParam String token, @RequestBody RequestDTO requestDTO) {
         TokenDTO tokenDTO = this.iAuthService.validate(token, requestDTO);
         if(tokenDTO==null) {
 

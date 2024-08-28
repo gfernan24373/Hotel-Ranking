@@ -63,7 +63,7 @@ public class AuthServiceImpl implements IAuthService{
     @Override
     public TokenDTO validate(String token, RequestDTO requestDTO) {
 
-        if(this.jwtProvider.validate(token, requestDTO)) {
+        if(!this.jwtProvider.validate(token, requestDTO)) {
             return null;
         }
         String username = this.jwtProvider.getUsernameFromToken(token);

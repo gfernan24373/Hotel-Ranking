@@ -14,10 +14,10 @@ spring:
 admin-paths:
   paths:
     -
-      uri: "/api/v2/user"
+      uri: "/api/v1/user"
       method: "POST"
     -
-      uri: "/api/v2/user"
+      uri: "/api/v1/user"
       method: "GET"
 ttl:
   secret: 20

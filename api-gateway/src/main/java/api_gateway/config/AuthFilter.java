@@ -36,7 +36,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
             return webClient
                     .build()
                     .post()
-                    .uri("http://auth-service/auth/validate?token="+chunks[1])
+                    .uri("http://AUTH-SERVICE/auth/validate?token="+chunks[1])
                     .bodyValue(
                             new RequestDTO(
                                     exchange.getRequest().getPath().toString(),

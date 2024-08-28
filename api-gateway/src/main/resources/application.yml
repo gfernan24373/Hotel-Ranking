@@ -16,20 +16,20 @@ spring:
     gateway:
       routes:
         - id: MS-USER
-          uri: lb://MS-USER
+          uri: http://172.26.192.1:8081
           predicates:
             - Path=/api/v1/user/**
           filters:
             - AuthFilter
         - id: MS-RANKINGS
-          uri: lb://MS-RANKINGS
+          uri: http://172.26.192.1:8083
           predicates:
             - Path=/api/v1/ranking/**
         - id: HOTEL-MS
-          uri: lb://HOTEL-MS
+          uri: http://172.26.192.1:8080
           predicates:
             - Path=/api/v1/hotel/**
         - id: AUTH-SERVICE
-          uri: lb://AUTH-SERVICE
+          uri: http://172.26.192.1:8086
           predicates:
             - Path=/auth/**
