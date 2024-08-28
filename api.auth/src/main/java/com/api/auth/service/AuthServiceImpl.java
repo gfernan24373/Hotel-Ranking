@@ -23,27 +23,24 @@ public class AuthServiceImpl implements IAuthService{
     private final JwtProvider jwtProvider;
 
     @Override
-    public AuthUser save(NewUserDTO newUserDTO) {
+    public AuthUser save(NewUserDTO newUserDto){
         Optional<AuthUser> user = this
                 .authRepository
-                .findByUserName((newUserDTO.getUserName()));
-
-        if (user.isPresent()) {
+                .findByUsername(newUserDto.getUsername());
+        if(user.isPresent()){
             return null;
         }
 
-        String password = this
-                .passwordEncoder
-                .encode(newUserDTO.getPassword());
+        String password =  this.passwordEncoder.encode(newUserDto.getPassword());
 
         AuthUser authUser = AuthUser
                 .builder()
-                .userName(newUserDTO.getUserName())
-                .password(newUserDTO.getRole())
+                .username(newUserDto.getUsername())
+                .password(password)
+                .role(newUserDto.getRole())
                 .build();
 
-
-        return this.authRepository.save((authUser));
+        return  this.authRepository.save(authUser);
 
     }
 
@@ -51,7 +48,7 @@ public class AuthServiceImpl implements IAuthService{
     public TokenDTO login(AuthDTO authDTO) {
         Optional<AuthUser> user = this
                 .authRepository
-                .findByUserName(authDTO.getUsername());
+                .findByUsername(authDTO.getUsername());
 
         if (user.isEmpty()) {
             return null;
@@ -71,7 +68,7 @@ public class AuthServiceImpl implements IAuthService{
         }
         String username = this.jwtProvider.getUsernameFromToken(token);
 
-        if(!this.authRepository.findByUserName(username).isPresent()) {
+        if(!this.authRepository.findByUsername(username).isPresent()) {
             return null;
         }
         return new TokenDTO(token);

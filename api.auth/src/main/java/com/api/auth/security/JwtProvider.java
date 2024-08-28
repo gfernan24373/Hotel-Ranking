@@ -61,7 +61,7 @@ public class JwtProvider {
         return Jwts
                 .builder()
                 .claims(claims)
-                .subject(user.getUserName())
+                .subject(user.getUsername())
                 .issuedAt(this.converToLocalDateTimeToDate(now))
                 .expiration(this.converToLocalDateTimeToDate(now.plusHours(endToken)))
                 .signWith(Keys.hmacShaKeyFor(secret.getEncoded()))
